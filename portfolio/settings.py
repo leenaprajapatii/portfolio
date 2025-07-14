@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8kcy$dne4e_r#nf$quf7-h)qty-(3^8)h24pb3087!r=*$4jp7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://portfolio-b2y4.onrender.com']
 
 TAILWIND_APP_NAME = 'myportfolio'
 INTERNAL_IPS = ["127.0.0.1"]
