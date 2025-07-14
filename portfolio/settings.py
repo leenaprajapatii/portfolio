@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8kcy$dne4e_r#nf$quf7-h)qty-(3^8)h24pb3087!r=*$4jp7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://portfolio-b2y4.onrender.com']
+ALLOWED_HOSTS = ['portfolio-b2y4.onrender.com', 'localhost', '127.0.0.1']
 
 TAILWIND_APP_NAME = 'myportfolio'
 INTERNAL_IPS = ["127.0.0.1"]
