@@ -1,0 +1,918 @@
+nav svg {
+    width: 20px;
+    height: 20px;
+    transition: stroke 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover svg,
+nav button:hover svg {
+    stroke: #3b82f6; /* your brand hover color */
+    transform: scale(1.05);
+}
+
+
+/* --- Global Variables (unchanged from previous) --- */
+/* --- Navigation Bar Styles --- */
+nav {
+  background-color: transparent; /* Default (light mode) */
+  transition: background-color 0.3s ease;
+  nav {
+    padding-top: 1.25rem;  /* py-5 */
+    padding-bottom: 1.25rem;
+}
+  
+}
+
+/* Dark mode navigation */
+.dark nav {
+  background-color: #000 !important; /* Pure black in dark mode */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Optional subtle border */
+}
+
+/* Ensure nav buttons/text remain visible */
+.dark nav button,
+.dark nav a {
+  color: white !important;
+}
+
+/* Hover effects */
+.dark nav button:hover,
+.dark nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+nav button {
+  background-color: transparent !important; /* Forces transparent background for all nav buttons */
+}
+
+/* Ensure no background on hover/focus/active states */
+nav button:hover,
+nav button:focus,
+nav button:active {
+  background-color: transparent !important;
+  /* You might want to add other hover effects here, like text color change or underline */
+}
+
+/* Also for the anchor tags in your nav if they also have a background */
+nav a {
+  background-color: transparent !important;
+}
+
+nav a:hover,
+nav a:focus,
+nav a:active {
+  background-color: transparent !important;
+}
+
+.nav-link {
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+    gap:0.5rem; /* ~space-x-3 */
+}
+
+nav .flex.items-center > .nav-link + .nav-link {
+    margin-left: 1.5rem; /* 24px */
+}
+#blinds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  transform: rotate(-3deg); /* ANGLED beam */
+}
+
+#blinds .shutters {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.shutter {
+  width: 100%;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.06); /* Light beam effect */
+}
+
+.dark .shutter {
+  background-color: rgba(255, 255, 255, 0.05); /* Light beam for dark mode */
+}
+.shutter {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.03),
+    rgba(0, 0, 0, 0.07),
+    rgba(0, 0, 0, 0.03)
+  );
+}
+
+.dark .shutter {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+
+
+body.animation-ready {
+  animation-play-state: running;
+  animation-duration: 1s;
+  animation-name: sunrise;
+}
+
+body.animation-ready.dark {
+  animation-duration: 1.7s;
+  animation-name: sunset;
+}
+
+
+
+:root {
+  --background: 48 100% 97%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 250 75% 60%;
+  --primary-foreground: 355.7 100% 97.3%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 250 75% 60%;
+
+  /* Day/night transition colors */
+  --day: 48 100% 97%;
+  --evening: 35 80% 75%;
+  --dusk: 25 65% 51%;
+  --night: 250 30% 10%;
+  --dawn: 250 25% 20%;
+  --morning: 45 80% 85%;
+
+  /* Light/dark variables */
+  --light: var(--day);
+  --dark: var(--night);
+  --shadow: #1a1917;
+  --bounce-light: hsla(48, 100%, 80%, 0.3);
+  --timing-fn: cubic-bezier(0.455, 0.190, 0.000, 0.985);
+
+  /* Dot pattern colors */
+  --dot-color-light: rgba(0, 0, 0, 0.03); /* Very subtle black dots for light mode */
+}
+
+.dark {
+  --background: 0 0% 0%; /* Pure black background */
+  --foreground: 0 0% 100%; /* Pure white text */
+  --card: 0 0% 0%; /* Pure black card background */
+  --card-foreground: 0 0% 100%; /* Pure white text on cards */
+  --popover: 0 0% 0%; /* Pure black popover background */
+  --popover-foreground: 0 0% 100%; /* Pure white text on popovers */
+  --primary: 250 75% 60%; /* Keep primary color */
+  --primary-foreground: 0 0% 100%; /* Pure white text on primary */
+  --secondary: 0 0% 0%; /* Pure black secondary */
+  --secondary-foreground: 0 0% 100%; /* Pure white text on secondary */
+  --muted: 0 0% 0%; /* Pure black muted background */
+  --muted-foreground: 0 0% 90%; /* Brighter muted text */
+  --accent: 0 0% 0%; /* Pure black accent */
+  --accent-foreground: 0 0% 100%; /* Pure white text on accent */
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 85.7% 97.3%;
+  --border: 0 0% 0%; /* Pure black border */
+  --input: 0 0% 0%; /* Pure black input */
+  --ring: 250 75% 60%;
+
+  /* Light/dark variables for dark mode */
+  --light: var(--night);
+  --dark: var(--day);
+  --shadow: #000000; /* Pure black shadow */
+  --bounce-light: hsla(0, 0%, 0%, 100); /* Pure black bounce light for dark mode */
+
+  /* Dot pattern colors for dark mode */
+  --dot-color-dark: rgba(255, 255, 255, 0.05); /* Subtle white dots for dark mode */
+}
+
+/* Global resets and base styles */
+*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground)); /* Default text color from :root or .dark */
+  /* font-family: var(--font-body); You'll need to define font-body or use a system font */
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+
+  animation-duration: 0s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+/* Subtle background dot pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Ensure it's below other background elements */
+  background-image: radial-gradient(circle, var(--dot-color-light) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 1; /* Default opacity for light mode */
+  transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.dark body::before {
+  background-image: radial-gradient(circle, var(--dot-color-dark) 1px, transparent 1px);
+  opacity: 1; /* Default opacity for dark mode */
+}
+
+
+body.animation-ready {
+  animation-play-state: running;
+  animation-duration: 1s;
+  animation-name: sunrise;
+}
+
+body.animation-ready.dark {
+  animation-duration: 1.7s;
+  animation-name: sunset;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif; /* Assuming font-sans maps to a system sans-serif */
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: #374151; /* Default for headings in light mode */
+}
+
+/* Day/Night Animations */
+@keyframes sunrise {
+  0% { background-color: hsl(var(--night)); }
+  10% { background-color: hsl(var(--dawn)); }
+  35% { background-color: hsl(var(--morning)); }
+  100% { background-color: hsl(var(--day)); }
+}
+
+@keyframes sunset {
+  0% { background-color: hsl(var(--day)); }
+  30% { background-color: hsl(var(--evening)); }
+  60% { background-color: hsl(var(--dusk)); }
+  90% { background-color: hsl(var(--dawn)); }
+  100% { background-color: hsl(var(--night)); }
+}
+
+/* Dappled Light Effect */
+#dappled-light {
+  pointer-events: none;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+#progressive-blur {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+#progressive-blur > div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  backdrop-filter: blur(var(--blur-amount));
+  mask-image: linear-gradient(252deg, transparent, transparent var(--stop1), black var(--stop2), black);
+}
+
+#progressive-blur > div:nth-child(1) {
+  --blur-amount: 6px;
+  --stop1: 0%;
+  --stop2: 0%;
+}
+
+#progressive-blur > div:nth-child(2) {
+  --blur-amount: 12px;
+  --stop1: 40%;
+  --stop2: 80%;
+}
+
+#progressive-blur > div:nth-child(3) {
+  --blur-amount: 48px;
+  --stop1: 40%;
+  --stop2: 70%;
+}
+
+#progressive-blur > div:nth-child(4) {
+  --blur-amount: 96px;
+  --stop1: 70%;
+  --stop2: 80%;
+}
+
+/* Glow Effects */
+#glow {
+  position: absolute;
+  background: linear-gradient(309deg, var(--bounce-light), var(--bounce-light) 20%, transparent);
+  transition: background 1.0s var(--timing-fn);
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+}
+
+#glow-bounce {
+  content: "";
+  position: absolute;
+  background: linear-gradient(355deg, var(--bounce-light) 0%, transparent 30%, transparent 100%);
+  transition: background 1.0s var(--timing-fn);
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+/* Perspective Elements */
+.perspective {
+  position: absolute;
+  transition: transform 1.7s var(--timing-fn), opacity 4s ease;
+  top: -30vh;
+  right: 0;
+  width: 80vw;
+  height: 130vh;
+  opacity: 0.07;
+  background-blend-mode: darken;
+  transform-origin: top right;
+  transform-style: preserve-3d;
+  transform: matrix3d(0.7500, -0.0625, 0.0000, 0.0008,
+      0.0000, 1.0000, 0.0000, 0.0000,
+      0.0000, 0.0000, 1.0000, 0.0000,
+      0.0000, 0.0000, 0.0000, 1.0000);
+}
+
+.dark .perspective {
+  opacity: 0.3;
+  transform: matrix3d(0.8333, 0.0833, 0.0000, 0.0003,
+      0.0000, 1.0000, 0.0000, 0.0000,
+      0.0000, 0.0000, 1.0000, 0.0000,
+      0.0000, 0.0000, 0.0000, 1.0000);
+}
+
+/* Leaves Animation */
+#leaves {
+  position: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  bottom: -20px;
+  right: -700px;
+  width: 1600px;
+  height: 1400px;
+  background-image: url("/static/images/leaves.png"); /* Adjusted path for Django static */
+  filter: url(#wind);
+  animation: billow 8s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.dark #leaves {
+  opacity: 0.1;
+}
+
+/* Blinds Effect */
+#blinds {
+  position: relative;
+  width: 100%;
+}
+
+#blinds .shutter,
+#blinds .bar {
+  background-color: var(--shadow);
+}
+
+#blinds > .shutters {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* align-items-end */
+  gap: 60px;
+  transition: gap 1.0s var(--timing-fn);
+}
+
+.dark #blinds > .shutters {
+  gap: 20px;
+}
+
+#blinds > .vertical {
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.vertical > .bar {
+  width: 5px;
+  height: 100%;
+}
+
+.shutter {
+  width: 100%;
+  height: 40px;
+  transition: height 1.0s var(--timing-fn);
+}
+
+.dark .shutter {
+  height: 80px;
+}
+
+/* Billow Animation */
+@keyframes billow {
+  0% { transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1); }
+  25% { transform: perspective(400px) rotateX(1deg) rotateY(2deg) scale(1.02); }
+  50% { transform: perspective(400px) rotateX(-4deg) rotateY(-2deg) scale(0.97); }
+  75% { transform: perspective(400px) rotateX(1deg) rotateY(-1deg) scale(1.04); }
+  100% { transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1); }
+}
+
+/* Glass effect */
+.glass {
+  background-color: hsla(var(--background), 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid hsla(var(--border), 0.5);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Animation utilities */
+.animate-in {
+  animation: animateIn 0.3s ease-in-out;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Explicit Text Colors for Light Mode (from Tailwind classes) */
+.text-gray-900 { color: #111827 !important; } /* Very dark gray */
+.text-gray-700 { color: #374151 !important; } /* Dark gray */
+.text-muted-foreground { color: hsl(var(--muted-foreground)) !important; } /* Default muted foreground */
+.text-primary { color: hsl(var(--primary)) !important; } /* Primary color */
+.text-gray-800 { color: #1f2937 !important; } /* Dark gray */
+.text-gray-200 { color: #e5e7eb !important; } /* Very light gray */
+.text-gray-300 { color: #d1d5db !important; } /* Light gray */
+.text-gray-600 { color: #4b5563 !important; } /* Medium dark gray */
+.text-gray-500 { color: #6b7280 !important; } /* Medium gray */
+.text-gray-400 { color: #9ca3af !important; } /* Light medium gray */
+.text-gray-100 { color: #f3f4f6 !important; } /* Very very light gray */
+.text-gray-50 { color: #f9fafb !important; } /* Almost white */
+
+
+/* Dark mode overrides - ensuring maximum visibility */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark p, .dark span, .dark div, .dark li, .dark a { /* Added li and a for broad coverage */
+  color: #fff !important; /* Force all these elements to white in dark mode */
+}
+
+/* Specific gray text classes, ensure they are white in dark mode */
+.dark .text-gray-900 { color: #fff !important; }
+.dark .text-gray-700 { color: #fff !important; }
+.dark .text-gray-50 { color: #fff !important; }
+.dark .text-gray-600 { color: #fff !important; }
+.dark .text-gray-500 { color: #fff !important; }
+.dark .text-gray-400 { color: #fff !important; }
+.dark .text-gray-800 { color: #fff !important; }
+.dark .text-gray-200 { color: #fff !important; }
+.dark .text-gray-100 { color: #fff !important; }
+.dark .text-white-100 { color: #fff !important; } /* Ensure this custom class also becomes white */
+.dark .text-muted-foreground { color: #fff !important; } /* Force muted text to white in dark mode for visibility */
+.dark .text-primary { color: hsl(var(--primary)) !important; } /* Primary color should remain primary, not turn white */
+.dark .text-gray-300 { color: #fff !important; }
+
+/* Ensure icons also get the correct color */
+/* For Font Awesome icons */
+.dark .svg-inline--fa {
+    color: #fff !important; /* Force Font Awesome icons to white */
+    fill: #fff !important; /* Ensure fill is also white if applicable */
+}
+
+/* For Lucide icons (inlined SVGs) - general rule */
+/* .dark svg[stroke="currentColor"], .dark svg[fill="currentColor"] {
+    stroke: #fff !important;
+    fill: #110f0f !important;
+} */
+
+.dark svg[stroke="currentColor"] {
+    stroke: currentColor !important; /* inherit text color */
+}
+
+.dark svg[fill="currentColor"] {
+    fill: none !important; /* prevent fill */
+}
+
+/* Specific case for primary colored icons within .text-primary elements */
+.dark .text-primary svg {
+    stroke: hsl(var(--primary)) !important;
+    fill: hsl(var(--primary)) !important;
+}
+
+
+/* Mobile fixes */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .perspective {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.05;
+    top: -10vh;
+  }
+
+  #leaves {
+    right: -900px;
+    width: 1200px;
+    height: 1000px;
+    opacity: 0.15;
+    bottom: -100px;
+  }
+
+  .dark #leaves {
+    opacity: 0.05;
+  }
+
+  #dappled-light {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #progressive-blur {
+    width: 100%;
+    height: 100%;
+  }
+
+  #progressive-blur > div {
+    width: 100%;
+    height: 100%;
+  }
+
+  #blinds > .shutters {
+    gap: 30px;
+  }
+
+  .dark #blinds > .shutters {
+    gap: 15px;
+  }
+
+  .shutter {
+    height: 30px;
+  }
+
+  .dark .shutter {
+    height: 60px;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+  #root {
+    padding: 0.5rem;
+  }
+
+  .perspective {
+    opacity: 0.03;
+  }
+
+  #leaves {
+    opacity: 0.1;
+  }
+
+  .dark #leaves {
+    opacity: 0.03;
+  }
+}
+
+/* --- Styles from App.css --- */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* --- Custom styles for elements that were originally Shadcn/ui buttons --- */
+/* Replicate the look of the default Shadcn button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 0.375rem; /* radius-md */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    height: 2.5rem; /* h-10 */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+}
+
+/* For the link buttons with ChevronRight */
+.group {
+    display: flex; /* Or whatever makes sense for your layout */
+    align-items: center; /* To align items in the group */
+    justify-content: center; /* To center content horizontally */
+}
+
+.group .flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+.group:hover .group-hover\:translate-x-1 {
+    transform: translateX(0.25rem); /* translate-x-1 */
+}
+
+/* Shadcn-like border and shadow for cards */
+.border-card {
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem; /* rounded-lg or rounded-md */
+    background-color: hsl(var(--card));
+}
+
+/* --- Specific classes from your components --- */
+.pt-20 { padding-top: 5rem; } /* 80px */
+.min-h-\[calc\(100vh-5rem\)\] { min-height: calc(100vh - 5rem); }
+.min-h-screen { min-height: 100vh; }
+.container { width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+@media (min-width: 640px) { .container { max-width: 640px; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+@media (min-width: 1536px) { .container { max-width: 1536px; } }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-start { align-items: flex-start; }
+.gap-8 { gap: 2rem; }
+@media (min-width: 768px) { .md\:gap-12 { gap: 3rem; } }
+.max-w-5xl { max-width: 64rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.w-full { width: 100%; }
+.relative { position: relative; }
+.overflow-hidden { overflow: hidden; }
+.rounded-lg { border-radius: 0.5rem; }
+.h-auto { height: auto; }
+.scale-110 { transform: scale(1.1); }
+@media (min-width: 768px) { .md\:scale-125 { transform: scale(1.25); } }
+.mix-blend-multiply { mix-blend-mode: multiply; }
+.opacity-80 { opacity: 0.8; }
+.absolute { position: absolute; }
+.inset-0 { top: 0px; right: 0px; bottom: 0px; left: 0px; }
+.bg-background\/5 { background-color: hsla(var(--background), 0.05); }
+.text-left { text-align: left; }
+/* .font-biro { font-family: 'biro', sans-serif; } */ /* You'll need to define this font if you want it */
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+@media (min-width: 768px) { .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; } }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
+@media (min-width: 768px) { .md\:space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; } }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+@media (min-width: 768px) { .md\:text-lg { font-size: 1.125rem; line-height: 1.75rem; } }
+.font-bold { font-weight: 700; }
+.object-cover { object-fit: cover; }
+.pt-4 { padding-top: 1rem; }
+.w-auto { width: auto; }
+.whitespace-normal { white-space: normal; }
+@media (min-width: 768px) { .md\:whitespace-nowrap { white-space: nowrap; } }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
+.transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.group:hover .group-hover\:translate-x-1 { transform: translateX(0.25rem); }
+.flex-shrink-0 { flex-shrink: 0; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+@media (min-width: 768px) { .md\:text-xl { font-size: 1.25rem; line-height: 1.75rem; } }
+.font-semibold { font-weight: 600; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-16 { margin-bottom: 4rem; }
+.mb-8 { margin-bottom: 2rem; }
+.border-b { border-bottom-width: 1px; }
+.pb-4 { padding-bottom: 1rem; }
+.border-l { border-left-width: 1px; }
+.ml-6 { margin-left: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: 3rem; }
+.pl-8 { padding-left: 2rem; }
+.justify-center { justify-content: center; }
+.w-10 { width: 2.5rem; }
+.h-10 { height: 2.5rem; }
+.bg-primary\/20 { background-color: hsla(var(--primary), 0.2); }
+.rounded-full { border-radius: 9999px; }
+.-left-5 { left: -1.25rem; }
+.ring-4 { box-shadow: 0 0 0 4px var(--tw-ring-color); }
+.ring-background { --tw-ring-color: hsl(var(--background)); }
+.gap-1 { gap: 0.25rem; }
+.font-normal { font-weight: 400; }
+.w-3 { width: 0.75rem; }
+.h-3 { height: 0.75rem; }
+.list-disc { list-style-type: disc; }
+.ml-5 { margin-left: 1.25rem; }
+.space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
+.text-foreground\/100 { color: hsla(var(--foreground), 1); }
+.dark\:text-foreground { color: hsl(var(--foreground)); }
+.hover\:text-primary:hover { color: hsl(var(--primary)); }
+.ml-1 { margin-left: 0.25rem; }
+.hover\:underline:hover { text-decoration-line: underline; }
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+@media (min-width: 768px) { .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.gap-6 { gap: 1.5rem; }
+.p-6 { padding: 1.5rem; }
+.hover\:border-primary:hover { border-color: hsl(var(--primary)); }
+.cursor-pointer { cursor: pointer; }
+.transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.h-full { height: 100%; }
+.flex-col { flex-direction: column; }
+.flex-grow { flex-grow: 1; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.mt-4 { margin-top: 1rem; }
+.rounded-md { border-radius: 0.375rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.fixed { position: fixed; }
+.top-0 { top: 0px; }
+.left-0 { left: 0px; }
+.right-0 { right: 0px; }
+.z-50 { z-index: 50; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.border-b { border-bottom-width: 1px; }
+.border-gray-200 { border-color: #e5e7eb; }
+.dark\:border-gray-800 { border-color: #1f2937; }
+.shadow-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+.justify-between { justify-content: space-between; }
+.md\:hidden { display: none; }
+.p-2 { padding: 0.5rem; }
+.hover\:bg-gray-100:hover { background-color: #f3f4f6; }
+.dark\:hover\:bg-gray-700:hover { background-color: #374151; }
+.space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-left: 1rem; }
+.hidden { display: none; }
+.mt-4 { margin-top: 1rem; }
+.bg-white { background-color: #fff; }
+.dark\:bg-gray-800 { background-color: #1f2937; }
+.p-4 { padding: 1rem; }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+.space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left: 0.5rem; }
+.md\:flex { display: flex; }
+.text-blue-600 { color: #2563eb; }
+.dark\:text-blue-400 { color: #60a5fa; }
+.text-purple-600 { color: #9333ea; }
+.dark\:text-purple-400 { color: #c084fc; }
+.text-pink-600 { color: #db2777; }
+.dark\:text-pink-400 { color: #f472b6; }
+.text-cyan-600 { color: #0891b2; }
+.dark\:text-cyan-400 { color: #22d3ee; }
+
+
+/* --- Font Awesome CSS --- */
+:root, :host {
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";
+  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";
+  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 6 Sharp Duotone";
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-2xs {
+  vertical-align: 0.1em;
+}
+.svg-inline--fa.fa-xs {
+  vertical-align: 0em;
+}
+.svg-inline--fa.fa-sm {
+  vertical-align: -0.0714285705em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.2em;
+}
+.svg-inline--fa.fa-xl {
+  vertical-align: -0.25em;
+}
+.svg-inline--fa.fa-2xl {
+  vertical-align: -0.3125em;
+}
+
+.svg-inline--fa.fa-3xl {
+  vertical-align: -0.375em;
+}

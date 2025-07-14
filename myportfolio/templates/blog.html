@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% comment %} <div class="min-h-screen container mx-auto px-4 py-12 flex flex-col items-center justify-center">
+  <div class="text-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-24 w-24 mx-auto mb-6 text-primary">
+      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+    </svg>
+    <h1 class="text-4xl font-bold mb-4">Blog</h1>
+    <p class="text-xl text-muted-foreground">
+      Exciting content coming soon! I'm currently working on sharing my machine learning journey, insights, and tutorials.
+    </p>
+  </div>
+</div> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Kishan Vavdara</title>
+    <style>
+        
+
+        
+
+        /* Main content wrapper */
+        .min-h-screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+        }
+
+        /* Text center alignment */
+        .text-center {
+            text-align: center;
+        }
+
+        /* SVG Icon styles */
+        .book-icon {
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto 1.5rem;
+            color: #312272ff; /* Primary blue color */
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Heading styles */
+        .main-heading {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        /* Paragraph styles */
+        .description {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-heading {
+                font-size: 1.875rem;
+            }
+            
+            .description {
+                font-size: 1.125rem;
+            }
+            
+            .book-icon {
+                width: 4rem;
+                height: 4rem;
+            }
+            
+            .min-h-screen {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-heading {
+                font-size: 1.5rem;
+            }
+            
+            .description {
+                font-size: 1rem;
+            }
+        }
+
+        /* Hover effects */
+        {% comment %} .book-icon:hover {
+            color: #2563eb;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Animation for content */
+        .text-center {
+            animation: fadeInUp 0.8s ease-out;
+        } {% endcomment %}
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <div class="container">
+            <div class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="book-icon">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                </svg>
+                <h1 class="main-heading">Blog</h1>
+                <p class="description">
+                    Exciting content coming soon! I'm currently working on sharing my machine learning journey, insights, and tutorials.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
